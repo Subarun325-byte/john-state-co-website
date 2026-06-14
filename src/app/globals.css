@@ -1,26 +1,280 @@
 @import "tailwindcss";
 
+/* ============================================
+   JOHN STATE CO — Luxury Design System
+   ============================================ */
+
+/* --- CSS Custom Properties --- */
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #111111;
+  --matte-black: #0B0B0B;
+  --charcoal: #111111;
+  --gold: #D4AF37;
+  --gold-light: #E8C84A;
+  --gold-dark: #B8962E;
+  --light-gray: #F5F5F5;
+  --medium-gray: #E0E0E0;
+  --text-muted: #6B7280;
+  --card-bg: #ffffff;
+  --card-border: rgba(212, 175, 55, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --overlay: rgba(0, 0, 0, 0.6);
+  --shadow-gold: 0 0 30px rgba(212, 175, 55, 0.15);
+  --shadow-card: 0 4px 30px rgba(0, 0, 0, 0.08);
 }
 
+.dark {
+  --background: #0B0B0B;
+  --foreground: #F5F5F5;
+  --card-bg: #161616;
+  --card-border: rgba(212, 175, 55, 0.15);
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --overlay: rgba(0, 0, 0, 0.8);
+  --text-muted: #9CA3AF;
+  --shadow-card: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* --- Tailwind v4 Theme Tokens --- */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-gold-dark: var(--gold-dark);
+  --color-charcoal: var(--charcoal);
+  --color-matte-black: var(--matte-black);
+  --color-light-gray: var(--light-gray);
+  --color-medium-gray: var(--medium-gray);
+  --color-text-muted: var(--text-muted);
+  --color-card-bg: var(--card-bg);
+  --color-card-border: var(--card-border);
+  --color-glass-bg: var(--glass-bg);
+  --color-glass-border: var(--glass-border);
+  --color-overlay: var(--overlay);
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-playfair);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* --- Base Styles --- */
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), 'Inter', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* --- Custom Scrollbar --- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--matte-black);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-light);
+}
+
+/* --- Selection --- */
+::selection {
+  background: rgba(212, 175, 55, 0.3);
+  color: var(--foreground);
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+  line-height: 1.15;
+}
+
+/* --- Glassmorphism --- */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+}
+
+.glass-gold {
+  background: rgba(212, 175, 55, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+/* --- Gold Glow Effect --- */
+.gold-glow {
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+  transition: box-shadow 0.4s ease;
+}
+.gold-glow:hover {
+  box-shadow: 0 0 40px rgba(212, 175, 55, 0.4), 0 0 80px rgba(212, 175, 55, 0.15);
+}
+
+/* --- Gold Text Gradient --- */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #D4AF37 0%, #E8C84A 50%, #D4AF37 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* --- Gold Border Gradient --- */
+.border-gold-gradient {
+  border-image: linear-gradient(135deg, #D4AF37, #E8C84A, #D4AF37) 1;
+}
+
+/* --- Luxury Button Base --- */
+.btn-luxury {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 36px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, #D4AF37, #E8C84A);
+  color: #0B0B0B;
+  border: none;
+}
+.btn-gold:hover {
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.4), 0 8px 25px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.btn-outline-gold {
+  background: transparent;
+  color: #D4AF37;
+  border: 1.5px solid #D4AF37;
+}
+.btn-outline-gold:hover {
+  background: rgba(212, 175, 55, 0.1);
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.2);
+  transform: translateY(-2px);
+}
+
+/* --- Premium Card --- */
+.card-luxury {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: var(--shadow-card);
+}
+.card-luxury:hover {
+  border-color: rgba(212, 175, 55, 0.3);
+  box-shadow: var(--shadow-gold), 0 20px 50px rgba(0, 0, 0, 0.15);
+  transform: translateY(-6px);
+}
+
+/* --- Divider --- */
+.divider-gold {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+  margin: 0 auto;
+}
+
+/* --- Animations --- */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-60px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(60px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulseGold {
+  0%, 100% { box-shadow: 0 0 10px rgba(212, 175, 55, 0.2); }
+  50% { box-shadow: 0 0 30px rgba(212, 175, 55, 0.4); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* --- Loading Screen --- */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0B0B0B;
+}
+
+.loading-logo {
+  animation: pulseGold 2s infinite;
+}
+
+/* --- Section Spacing --- */
+.section-padding {
+  padding: 100px 0;
+}
+
+@media (max-width: 768px) {
+  .section-padding {
+    padding: 60px 0;
+  }
+}
+
+/* --- Image Zoom on Hover --- */
+.img-zoom {
+  overflow: hidden;
+}
+.img-zoom img {
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.img-zoom:hover img {
+  transform: scale(1.08);
+}
+
+/* --- Star Rating --- */
+.star-gold {
+  color: #D4AF37;
 }
